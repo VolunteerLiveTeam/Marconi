@@ -9,25 +9,9 @@ import {InfluxDB} from 'influx';
 import config from 'config';
 
 class MonitorCore {
-    /*
-    snoowrap = undefined;
-    influx = undefined;
-
-    livethreads = [];
-*/
     constructor() {
-        let snooconf = {
-            userAgent: 'vlt team bot by (/u/youlikethaaaat)',
-            clientId: 'HczUbGQrASITSw'
-        };
-
         snooconf = config.get('reddit');
-
-        console.log(snooconf);
-
         this.snoowrap = new Snoowrap(snooconf);
-
-
 
         this.influx = new InfluxDB({
             host: '10.48.0.3',

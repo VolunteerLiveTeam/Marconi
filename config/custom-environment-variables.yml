@@ -1,0 +1,10 @@
+reddit:
+  userAgent: USER_AGENT
+  clientId: REDDIT_CLIENT_ID
+  clientSecret: REDDIT_CLIENT_SECRET
+  refreshToken: REDDIT_REFRESH_TOKEN
+  username: REDDIT_USERNAME
+  password: REDDIT_PASSWORD
+
+influx:
+  host: INFLUX_HOST

@@ -2,3 +2,7 @@
 .git
 node_modules
 dist
+
+config/*
+!config/default.yml
+!config/custom-environment-variables.yml
