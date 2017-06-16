@@ -6,8 +6,9 @@ import Snoowrap from 'snoowrap';
 import ThreadMonitor from './ThreadMonitor';
 import moment from 'moment';
 import {InfluxDB} from 'influx';
+import config from 'config';
 
-class SnooMonitor {
+class MonitorCore {
     /*
     snoowrap = undefined;
     influx = undefined;
@@ -15,11 +16,18 @@ class SnooMonitor {
     livethreads = [];
 */
     constructor() {
-        this.snoowrap = new Snoowrap({
+        let snooconf = {
             userAgent: 'vlt team bot by (/u/youlikethaaaat)',
-            clientId: 'HczUbGQrASITSw',
-            //removed
-        });
+            clientId: 'HczUbGQrASITSw'
+        };
+
+        snooconf = config.get('reddit');
+
+        console.log(snooconf);
+
+        this.snoowrap = new Snoowrap(snooconf);
+
+
 
         this.influx = new InfluxDB({
             host: '10.48.0.3',
@@ -55,4 +63,4 @@ class SnooMonitor {
     }
 }
 
-new SnooMonitor();
+new MonitorCore();

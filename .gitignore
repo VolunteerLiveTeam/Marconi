@@ -1,6 +1,9 @@
 dist/*
 !.gitkeep
 
+config/*
+!config/default.yml
+!config/production.yml.dist
 
 
 

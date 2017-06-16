@@ -1,0 +1,5 @@
+reddit:
+  # see https://snoocore.readme.io/docs/oauth-overview
+  clientId: *** your client id here ***
+  clientSecret: *** your secret here ***
+  refreshToken: *** your token here ***

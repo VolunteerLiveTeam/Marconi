@@ -1,0 +1,4 @@
+vlt:
+  build: .
+  volumes:
+    - ./config:/srv/config
