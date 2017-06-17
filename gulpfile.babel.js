@@ -3,6 +3,7 @@ var babel = require("gulp-babel");
 var watch = require('gulp-watch');
 var runSequence = require('run-sequence');
 var gutil = require('gutil');
+var plumber = require('gulp-plumber');
 
 gulp.task("default", function () {
     return gulp.task('build');
@@ -10,23 +11,26 @@ gulp.task("default", function () {
 
 
 gulp.task("build", function () {
-    return gulp.src("src/*.js")
+    return gulp.src("src/**/*.js")
         .pipe(babel())
         .pipe(gulp.dest("dist"));
 });
 
 
 gulp.task("watch", function () {
-    return watch("src/*.js", {ignoreInitial: false})
+    return watch("src/*/**.js", {ignoreInitial: false})
         .on("change", function (file) {
-            var b = babel().on('error', e => {
-                gutil.log(e);
-                b.end();
-            });
-
             gulp.src(file)
-                .pipe(b)
+                .pipe(plumber())
+                .pipe(babel())
                 .pipe(gulp.dest("dist"));
 
         });
+});
+
+gulp.task("buildwatch", function () {
+    return runSequence([
+        'build',
+        'watch'
+    ]);
 });
