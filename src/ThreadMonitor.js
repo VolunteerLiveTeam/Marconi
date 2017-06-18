@@ -30,7 +30,7 @@ export default class SnooMonitor {
                 this.num_posts += 1;
 
                 this.core.influx.writePoints([{
-                    measurement: 'posts',
+                    measurement: this.core.config.get('influx.measurements.posts'),
                     tags: {
                         slug: this.slug,
                     },
@@ -43,7 +43,7 @@ export default class SnooMonitor {
 
         this.live.on('settings.viewer_count', count => {
             this.core.influx.writePoints([{
-                measurement: 'viewers',
+                measurement: this.core.config.get('influx.measurements.viewers'),
                 tags: {
                     slug: this.slug,
                 },

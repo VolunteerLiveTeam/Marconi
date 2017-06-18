@@ -14,8 +14,8 @@ class MonitorCore {
         this.snoowrap = new Snoowrap(snooconf);
 
         this.influx = new InfluxDB({
-            host: '10.48.0.3',
-            database: 'reddit'
+            host: config.get('influx.host'),
+            database: config.get('influx.database')
         });
 
         setInterval(this.pollMessages.bind(this), 30000);
@@ -33,10 +33,11 @@ class MonitorCore {
                             let link = info[2];
                             let token = info[3];
 
-                            var lt = this.snoowrap.getLivethread(token);
+                            let lt = this.snoowrap.getLivethread(token);
                             lt.acceptContributorInvite().then(() => {
-                                var tm = new ThreadMonitor(this, token);
+                                this.startTracking(token);
                             });
+
                         }
 
                         message.markAsRead();
@@ -44,6 +45,12 @@ class MonitorCore {
                 }
             }
         })
+    }
+
+    startTracking(token) {
+        let tm = new ThreadMonitor(this, token);
+
+
     }
 }
 

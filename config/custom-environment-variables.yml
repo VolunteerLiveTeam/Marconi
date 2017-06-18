@@ -8,3 +8,11 @@ reddit:
 
 influx:
   host: INFLUX_HOST
+  database: INFLUX_DATABASE
+  measurements:
+    posts: INFLUX_MEASUREMENT_POSTS
+    viewers: INFLUX_MEASUREMENT_VIEWERS
+
+database:
+  type: INFLUX_DATABASE_TYPE
+  path: INFLUX_DATABASE_PATH
