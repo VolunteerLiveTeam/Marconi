@@ -18,8 +18,9 @@ gulp.task("build", function () {
 
 
 gulp.task("watch", function () {
-    return watch("src/*/**.js", {ignoreInitial: false})
+    return watch("src/**.js", {ignoreInitial: false})
         .on("change", function (file) {
+            console.log('building '+file)
             gulp.src(file)
                 .pipe(plumber())
                 .pipe(babel())

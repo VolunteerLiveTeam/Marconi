@@ -6,17 +6,25 @@ import Snoowrap from 'snoowrap';
 import ThreadMonitor from './ThreadMonitor';
 import moment from 'moment';
 import {InfluxDB} from 'influx';
-import config from 'config';
+import lowdb from 'lowdb';
+
+import config from './config';
 
 class MonitorCore {
     constructor() {
+
+        this.config = config;
+
         let snooconf = config.get('reddit');
+
         this.snoowrap = new Snoowrap(snooconf);
 
         this.influx = new InfluxDB({
             host: config.get('influx.host'),
             database: config.get('influx.database')
         });
+
+        this.database = lowdb(config.get('database.path'));
 
         setInterval(this.pollMessages.bind(this), 30000);
     }
