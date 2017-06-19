@@ -2,9 +2,6 @@ dist/*
 !.gitkeep
 
 config/*
-!config/default.yml
-!config/production.yml.dist
-!config/custom-environment-variables.yml
 
 .idea
 

@@ -16,8 +16,10 @@ class MonitorCore {
         this.config = config;
 
         let snooconf = config.get('reddit');
-
         this.snoowrap = new Snoowrap(snooconf);
+
+        //this.snoowrap.getMe().then(me => console.log(me));
+
 
         this.influx = new InfluxDB({
             host: config.get('influx.host'),

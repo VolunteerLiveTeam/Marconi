@@ -8,11 +8,13 @@ const config = convict({
     reddit: {
         userAgent: {
             env: 'USER_AGENT',
-            default: 'vlt team bot (by /u/youlikethaaaat)'
+            default: 'node:github/writhem/marconi:v0.1 (by /u/youlikethaaaat + /u/pironic)',
+            doc: 'See https://github.com/reddit/reddit/wiki/API#rules'
         },
         clientId: {
             env: 'REDDIT_CLIENT_ID',
-            default: undefined
+            default: undefined,
+            doc: 'see https://snoocore.readme.io/docs/oauth-overview'
         },
         clientSecret: {
             env: 'REDDIT_CLIENT_SECRET',
