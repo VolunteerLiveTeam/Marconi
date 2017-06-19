@@ -10,7 +10,7 @@ import config from 'config';
 
 class MonitorCore {
     constructor() {
-        snooconf = config.get('reddit');
+        let snooconf = config.get('reddit');
         this.snoowrap = new Snoowrap(snooconf);
 
         this.influx = new InfluxDB({
