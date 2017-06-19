@@ -18,11 +18,13 @@ const config = convict({
         },
         clientSecret: {
             env: 'REDDIT_CLIENT_SECRET',
-            default: undefined
+            default: undefined,
+            sensitive: true
         },
         refreshToken: {
             env: 'REDDIT_REFRESH_TOKEN',
-            default: undefined
+            default: undefined,
+            sensitive: true
         },
         username: {
             env: 'REDDIT_USERNAME',
@@ -30,7 +32,8 @@ const config = convict({
         },
         password: {
             env: 'REDDIT_PASSWORD',
-            default: undefined
+            default: undefined,
+            sensitive: true
         }
     },
     influx: {
@@ -70,10 +73,14 @@ const config = convict({
         }
     }
 });
+console.log(process.cwd());
 try {
-    config.loadFile([process.cwd() + '/config/config.json5']);
+    config.loadFile('./config/config.json5');
 }
 catch(e) {
 
 }
+
+console.log(config.toString());
+
 export default config;
