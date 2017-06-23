@@ -6,34 +6,40 @@ const fs = require("fs");
 
 const config = convict({
     reddit: {
-        userAgent: {
-            env: 'USER_AGENT',
-            default: 'node:github/writhem/marconi:v0.1 (by /u/youlikethaaaat + /u/pironic)',
-            doc: 'See https://github.com/reddit/reddit/wiki/API#rules'
+        oauth: {
+            userAgent: {
+                env: 'USER_AGENT',
+                default: 'node:github/writhem/marconi:v0.1 (by /u/youlikethaaaat + /u/pironic)',
+                doc: 'See https://github.com/reddit/reddit/wiki/API#rules'
+            },
+            clientId: {
+                env: 'REDDIT_CLIENT_ID',
+                default: undefined,
+                doc: 'see https://snoocore.readme.io/docs/oauth-overview'
+            },
+            clientSecret: {
+                env: 'REDDIT_CLIENT_SECRET',
+                default: undefined,
+                sensitive: true
+            },
+            refreshToken: {
+                env: 'REDDIT_REFRESH_TOKEN',
+                default: undefined,
+                sensitive: true
+            },
+            username: {
+                env: 'REDDIT_USERNAME',
+                default: undefined
+            },
+            password: {
+                env: 'REDDIT_PASSWORD',
+                default: undefined,
+                sensitive: true
+            }
         },
-        clientId: {
-            env: 'REDDIT_CLIENT_ID',
-            default: undefined,
-            doc: 'see https://snoocore.readme.io/docs/oauth-overview'
-        },
-        clientSecret: {
-            env: 'REDDIT_CLIENT_SECRET',
-            default: undefined,
-            sensitive: true
-        },
-        refreshToken: {
-            env: 'REDDIT_REFRESH_TOKEN',
-            default: undefined,
-            sensitive: true
-        },
-        username: {
-            env: 'REDDIT_USERNAME',
-            default: undefined
-        },
-        password: {
-            env: 'REDDIT_PASSWORD',
-            default: undefined,
-            sensitive: true
+        inboxInterval: {
+            env: 'REDDIT_INBOX_INTERVAL',
+            default: 30
         }
     },
     influx: {
@@ -82,5 +88,6 @@ catch(e) {
 }
 
 console.log(config.toString());
+
 
 export default config;

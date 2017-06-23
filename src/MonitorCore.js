@@ -15,7 +15,7 @@ class MonitorCore {
 
         this.config = config;
 
-        let snooconf = config.get('reddit');
+        let snooconf = config.get('reddit.oauth');
         this.snoowrap = new Snoowrap(snooconf);
 
         //this.snoowrap.getMe().then(me => console.log(me));
@@ -26,9 +26,22 @@ class MonitorCore {
             database: config.get('influx.database')
         });
 
-        this.database = lowdb(config.get('database.path'));
+        this.db = lowdb(config.get('database.path'));
+        this.db.defaults({
+            'tracking': [],
+            'users': []
+        }).write();
 
-        setInterval(this.pollMessages.bind(this), 30000);
+
+
+        this.db.get('tracking').value().forEach(feed => {
+            if (feed.state == "live" || feed.state == "unknown") {
+                this.startTracking(feed.slug, false);
+            }
+        });
+
+
+        setInterval(this.pollMessages.bind(this), this.config.get('reddit.inboxInterval') * 1000);
     }
 
     pollMessages() {
@@ -57,9 +70,23 @@ class MonitorCore {
         })
     }
 
-    startTracking(token) {
+
+    startTracking(token, persist = false) {
         let tm = new ThreadMonitor(this, token);
 
+        let tracking = this.db.get('tracking').find({slug: token});
+
+        /*if (tm.wrap.fetch(info => {
+                if (info.state == 'live') {
+                    if (!tracking) {
+                        //this.db.
+                        this.db.get('tracking').push({
+                            slug: token,
+                            title: info.title
+                        })
+                    }
+                }
+            }));*/
 
     }
 }

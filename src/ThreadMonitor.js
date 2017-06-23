@@ -13,6 +13,7 @@ export default class SnooMonitor {
     constructor(core, slug) {
         this.core = core;
         this.slug = slug;
+
         this.live = new LiveThread(this.snoo, slug);
 
         this.num_posts = 0;
@@ -20,6 +21,32 @@ export default class SnooMonitor {
         //we add in the snoowrap for its api methods
         this.wrap = this.snoo.getLivethread(slug);
         this.wrap.closeStream();
+
+        this.db = this.core.db.get('tracking').find({slug: slug});
+
+        if (!this.db.value()) {
+            this.db = this.core.db.get('tracking').push({slug: slug, state: 'unknown'});
+            this.db.write();
+        }
+        this.wrap.fetch().then(info => {
+            this.db
+                .set('state', info.state)
+                .set('title', info.title)
+                .write();
+        });
+
+        this.live.on('settings.state', state => {
+            this.db
+                .set('state', state)
+                .write();
+        });
+
+        this.live.on('settings.title', title => {
+            this.db
+                .set('title', title)
+                .write();
+        });
+
 
         this.live.on('update', update => {
             if (update.body.startsWith('/echo')) {

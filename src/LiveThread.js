@@ -95,7 +95,7 @@ export default class LiveThread {
             request(this.geturl('about.json'), (error, response, body) => {
                 if (error)
                     reject();
-                console.log(body);
+                //console.log(body);
                 let data = JSON.parse(body);
                 this.settings = data.data;
                 resolve(data.data);
