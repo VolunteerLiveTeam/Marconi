@@ -10,10 +10,10 @@
     "watch": "npm run gulp watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "WritheM <radio@writhem.com>",
+  "author": "WritheM <admin@writhem.com>",
   "contributors": [
     "Joe Carter <youlikethaaaat@gmail.com>",
-    "Michael Writhe <mike@writhem.com>"
+    "Michael Writhe <michael@writhem.com>"
   ],
   "repository": "WritheM/Marconi",
   "license": "ISC",
