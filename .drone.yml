@@ -1,0 +1,15 @@
+pipeline:
+  build:
+    image: docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - docker build -t localhost/marconi_app:v${DRONE_BUILD_NUMBER} .
+  rancher:
+    image: peloton/drone-rancher
+    url: https://wm2-ab-ca.writhem.net/v2-beta
+    service: marconi/vlt
+    docker_image: localhost/marconi_app:v${DRONE_BUILD_NUMBER}
+    confirm: true
+    timeout: 300
+    secrets: [ rancher_access_key, rancher_secret_key ]
