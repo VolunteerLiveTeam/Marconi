@@ -13,3 +13,4 @@ pipeline:
     confirm: true
     timeout: 300
     secrets: [ rancher_access_key, rancher_secret_key ]
+
