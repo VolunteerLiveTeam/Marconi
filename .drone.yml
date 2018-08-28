@@ -12,3 +12,5 @@ pipeline:
     confirm: true
     timeout: 300
     secrets: [ plugin_url, rancher_access_key, rancher_secret_key ]
+    when:
+      event: [push, tag, deployment]
