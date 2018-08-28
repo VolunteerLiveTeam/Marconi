@@ -14,4 +14,4 @@ pipeline:
     secrets: [ plugin_url, rancher_access_key, rancher_secret_key ]
     when:
       branch: master
-      event: [push, tag, deployment]
+      event: [ push, tag, deployment ]
