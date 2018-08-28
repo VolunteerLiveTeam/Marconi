@@ -128,5 +128,9 @@ export default class LiveThread {
     once() {
         this.emitter.once.apply(this.emitter, arguments);
     }
+
+    off() {
+        this.emitter.off.apply(this.emitter, arguments);
+    }
 }
 

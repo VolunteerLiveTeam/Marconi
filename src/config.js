@@ -85,6 +85,54 @@ const config = convict({
             env: 'INFLUX_DATABASE_PATH',
             default: 'config/database.json'
         }
+    },
+    webhooks: {
+        connected: {
+            format: Array,
+            default: []
+        },
+        activity: {
+            format: Array,
+            default: []
+        },
+        update: {
+            format: Array,
+            default: []
+        },
+        strike: {
+            format: Array,
+            default: []
+        },
+        delete: {
+            format: Array,
+            default: []
+        },
+        embeds_ready: {
+            format: Array,
+            default: []
+        },
+        settings: {
+            viewer_count: {
+                format: Array,
+                default: []
+            },
+            state: {
+                format: Array,
+                default: []
+            },
+            description: {
+                format: Array,
+                default: []
+            },
+            title: {
+                format: Array,
+                default: []
+            },
+            resources: {
+                format: Array,
+                default: []
+            }
+        }
     }
 });
 console.log(process.cwd());

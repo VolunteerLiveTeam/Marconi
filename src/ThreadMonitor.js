@@ -3,7 +3,7 @@
  */
 
 import LiveThread from './LiveThread';
-const request = require("request");
+import Webhooks from "./Webhooks";
 
 export default class SnooMonitor {
     /**
@@ -16,6 +16,7 @@ export default class SnooMonitor {
         this.slug = slug;
 
         this.live = new LiveThread(this.snoo, slug);
+        this.webhooks = new Webhooks(this.live)
 
         this.num_posts = 0;
 
