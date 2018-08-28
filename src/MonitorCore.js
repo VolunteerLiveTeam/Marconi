@@ -18,7 +18,9 @@ class MonitorCore {
         let snooconf = config.get('reddit.oauth');
         this.snoowrap = new Snoowrap(snooconf);
 
-        //this.snoowrap.getMe().then(me => console.log(me));
+        this.snoowrap.getMe().then(me => {
+            console.log("Authentication successful.");
+        });
 
 
         this.influx = new InfluxDB({
