@@ -9,7 +9,7 @@ const config = convict({
         oauth: {
             userAgent: {
                 env: 'USER_AGENT',
-                default: 'node:github/writhem/marconi:v0.1 (by /u/youlikethaaaat + /u/pironic)',
+                default: 'node:github/writhem/marconi:v0.1.1 (by /u/youlikethaaaat + /u/pironic)',
                 doc: 'See https://github.com/reddit/reddit/wiki/API#rules'
             },
             clientId: {
@@ -51,6 +51,14 @@ const config = convict({
         host: {
             env: 'INFLUX_HOST',
             format: 'String',
+            default: undefined
+        },
+        username: {
+            env: 'INFLUX_USERNAME',
+            default: undefined
+        },
+        password: {
+            env: 'INFLUX_PASSWORD',
             default: undefined
         },
         database: {

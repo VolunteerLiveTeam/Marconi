@@ -23,7 +23,9 @@ class MonitorCore {
 
         this.influx = new InfluxDB({
             host: config.get('influx.host'),
-            database: config.get('influx.database')
+            database: config.get('influx.database'),
+            username: config.get('influx.username'),
+            password: config.get('influx.password')
         });
 
         this.db = lowdb(config.get('database.path'));

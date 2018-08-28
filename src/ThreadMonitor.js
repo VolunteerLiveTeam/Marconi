@@ -3,6 +3,7 @@
  */
 
 import LiveThread from './LiveThread';
+const request = require("request");
 
 export default class SnooMonitor {
     /**
