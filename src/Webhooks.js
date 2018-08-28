@@ -40,7 +40,7 @@ export default class Webhooks {
                     body: {
                         type: eventType,
                         liveThreadId: this.live.slug,
-                        payload
+                        payload: ('payload' in payload) ? payload.payload : payload
                     },
                     json: true
                 }, function(err, response, body) {
