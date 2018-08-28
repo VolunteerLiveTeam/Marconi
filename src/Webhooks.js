@@ -1,14 +1,13 @@
 const request = require("request");
 
-import config from './config';
-
 export default class Webhooks {
-    constructor(liveThread) {
+    constructor(config, liveThread) {
+        this.config = config;
         this.live = liveThread;
 
         this.listeners = {};
 
-        const hooks = config.get("webhooks");
+        const hooks = this.config.get("webhooks");
         Object.keys(hooks).filter(x => hooks[x].length > 0).forEach(key => {
             const listener = payload => this.sendWebhook(key, payload);
             this.live.on(key, listener);
@@ -29,7 +28,7 @@ export default class Webhooks {
     }
 
     sendWebhook(eventType, payload) {
-        const targets = config.get(`webhooks.${eventType}`);
+        const targets = this.config.get(`webhooks.${eventType}`);
         if (!Array.isArray(targets)) {
             console.error(`config.${eventType} is not an array! (unexpected event type?)`);
         }

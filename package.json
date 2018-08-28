@@ -8,12 +8,15 @@
     "gulp": "node node_modules/gulp/bin/gulp.js",
     "build": "npm run gulp build",
     "watch": "npm run gulp watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:coverage": "jest --coverage --collectCoverageFrom=\"src/*.js\"",
+    "test:watch": "jest --watch"
   },
   "author": "WritheM <admin@writhem.com>",
   "contributors": [
     "Joe Carter <youlikethaaaat@gmail.com>",
-    "Michael Writhe <michael@writhem.com>"
+    "Michael Writhe <michael@writhem.com>",
+    "Marks Polakovs <marks@markspolakovs.me>"
   ],
   "repository": "WritheM/Marconi",
   "license": "ISC",
@@ -37,6 +40,8 @@
     "gulp-plumber": "^1.1.0",
     "gulp-watch": "^4.3.11",
     "gutil": "^1.6.4",
+    "jest": "^23.5.0",
+    "nock": "^9.6.1",
     "run-sequence": "^1.2.2"
   }
 }
