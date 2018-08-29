@@ -12,16 +12,14 @@ export default class LiveThread {
         this.settings = undefined;
         this.emitter = new EventEmitter();
         this.connected = false;
-
-        this._connect();
     }
 
     geturl(path) {
         return 'https://reddit.com/live/' + this.slug + (path ? "/" + path : "");
     }
 
-    _connect() {
-        this._fetchSettings().then(settings => {
+    connect() {
+        return this._fetchSettings().then(settings => {
                 if (this.settings.state === 'live') {
                     this.ws = new WebSocket(settings.websocket_url);
                     this.ws.on('open', () => {
@@ -75,14 +73,14 @@ export default class LiveThread {
                         }
                     });
                     this.ws.on('error', (err) => {
-                        if (connected) { //was previously connected, connect right away
+                        if (this.connected) { //was previously connected, connect right away
                             this.connected = false;
 
-                            this._connect();
+                            this.connect();
                         }
                     });
                     this.ws.on('close', () => {
-                        this._connect();
+                        this.connect();
                     });
                 }
             }
@@ -93,9 +91,10 @@ export default class LiveThread {
     _fetchSettings() {
         return new Promise((resolve, reject) => {
             request(this.geturl('about.json'), (error, response, body) => {
-                if (error)
+                if (error || response.statusCode >= 400) {
                     reject();
-                //console.log(body);
+                    return;
+                }
                 let data = JSON.parse(body);
                 this.settings = data.data;
                 resolve(data.data);
