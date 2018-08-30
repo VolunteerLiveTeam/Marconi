@@ -18,3 +18,4 @@ pipeline:
   slack:
     image: plugins/slack
     channel: technical
+    secrets: [ slack_webhook ]
