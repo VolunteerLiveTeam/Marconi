@@ -1,6 +1,6 @@
 pipeline:
   security-check:
-    image: drone-security-check
+    image: vlt/drone-security-check
     environment:
       - REPO_NAME=${DRONE_REPO_NAME}
       - REPO_OWNER=${DRONE_REPO_OWNER}
