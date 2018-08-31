@@ -1,4 +1,11 @@
 pipeline:
+  security-check:
+    image: drone-security-check
+    environment:
+      - REPO_NAME=${DRONE_REPO_NAME}
+      - REPO_OWNER=${DRONE_REPO_OWNER}
+      - PULL_REQUEST=${DRONE_PR_NUMBER}
+      - TRUSTED_USERS=markspolakovs,pironic
   build:
     image: docker
     volumes:
