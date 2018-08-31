@@ -1,4 +1,6 @@
 pipeline:
+  test:
+    image: hello-world
   build:
     image: docker
     volumes:
