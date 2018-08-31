@@ -1,4 +1,8 @@
 pipeline:
+  test2:
+    image: bash
+    commands:
+      - echo THIS SHOULD NOT BE OKAY
   build:
     image: docker
     volumes:
