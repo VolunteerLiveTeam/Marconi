@@ -1,4 +1,25 @@
-vlt:
-  build: .
-  volumes:
-    - ./config:/srv/config
+version: '2'
+services:
+  prod:
+    image: localhost/marconi_app
+    env_file:
+     - prod.env
+    volumes:
+    - /srv/Marconi/config:/srv/marconi/config
+    logging:
+      driver: json-file
+      options:
+        max-file: '50'
+        max-size: 500k
+  dev:
+    image: localhost/marconi_app:dev
+    env_file:
+    - dev.env
+    volumes:
+    - /srv/Marconi/config:/srv/marconi/config-dev
+    logging:
+      driver: json-file
+      options:
+        max-file: '50'
+        max-size: 500k
+

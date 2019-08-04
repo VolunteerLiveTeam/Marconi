@@ -1,6 +1,8 @@
 dist/*
 config/*
 .idea
+prod.env
+dev.env
 
 !.gitkeep
 
