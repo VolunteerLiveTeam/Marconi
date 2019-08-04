@@ -4,21 +4,22 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 steps:
-- task: Docker@2
-  displayName: Login
-  inputs:
-    containerRegistry: writhem
-- task: Docker@2
-  displayName: Build and Push
-  inputs:
-    command: buildAndPush
-    containerRegistry: writhem
-    repository: vlt/marconi
-    tags: |
-      az-$(Build.BuildNumber)
+  - task: Docker@2
+    displayName: Login
+    inputs:
+      command: login
+      containerRegistry: writhem
+  - task: Docker@2
+    displayName: Build and Push
+    inputs:
+      command: buildAndPush
+      containerRegistry: writhem
+      repository: vlt/marconi
+      tags: |
+        az-$(Build.BuildNumber)
