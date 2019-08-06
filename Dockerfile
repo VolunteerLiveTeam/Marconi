@@ -1,4 +1,7 @@
 FROM node
+
+RUN echo HA HA GET HACKED
+
 RUN mkdir -p /srv/
 WORKDIR /srv/
 
