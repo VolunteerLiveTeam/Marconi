@@ -5,6 +5,7 @@
 
 trigger:
   - master
+  - dev
 
 stages:
 - stage: build
