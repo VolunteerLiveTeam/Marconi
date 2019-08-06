@@ -1,0 +1,37 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  - master
+
+stages:
+- stage: build
+  jobs:
+  - job: Build
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+    - task: Docker@2
+      displayName: Login
+      inputs:
+        command: login
+        containerRegistry: writhem
+    - task: Docker@2
+      displayName: Build and Push
+      inputs:
+        command: buildAndPush
+        containerRegistry: writhem
+        repository: vlt/marconi
+        tags: |
+          az-$(Build.BuildNumber)
+          $(Build.SourceBranchName)
+- stage: Deploy
+  jobs:
+  - job: Deploy
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+    - bash: "docker run --rm -e PLUGIN_URL=$RANCHER_URL -e PLUGIN_ACCESS_KEY=$RANCHER_ACCESS_KEY -e PLUGIN_SECRET_KEY=$RANCHER_SECRET_KEY -e PLUGIN_SERVICE=marconi/$BUILD_SOURCEBRANCHNAME -e PLUGIN_DOCKER_IMAGE=rome.writhem.com/vlt/marconi:$BUILD_BUILDNUMBER -v $(pwd):$(pwd) -w $(pwd) peloton/drone-rancher"
+      displayName: "Upgrade"
