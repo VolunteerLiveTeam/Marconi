@@ -22,7 +22,7 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/register": "^7.5.5",
     "bluebird": "^3.5.0",
-    "convict": "^4.0.0",
+    "convict": "^6.2.4",
     "eventemitter3": "^2.0.3",
     "influx": "^5.0.7",
     "js-yaml": "^3.8.4",
